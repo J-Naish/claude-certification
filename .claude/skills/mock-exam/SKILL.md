@@ -59,8 +59,16 @@ For each question, BEFORE presenting it:
    - Wrong but tempting (a common misconception, a deprecated approach, a near-miss flag name, or a correct statement that doesn't address *this* question's constraint)
    - Mutually exclusive with the correct answer
    - Roughly equal in length and specificity to the correct answer (length asymmetry is a tell)
+
+**Beware "length asymmetry by accident."** A common authoring failure: drafting the correct answer with embedded reasoning ("X because Y, combined with Z for defense in depth"), while distractors are short and snappy. Test-takers can then guess by length alone — "the long one with multiple sentences is usually right." **Counter this actively:**
+- Keep the correct answer's choice text *roughly the same word count* as the distractors. Save deep reasoning for the `explanation` block below the choices.
+- If a distractor needs to be long (e.g., to spell out the wrong-but-tempting logic), pad the correct answer to match — or trim the correct answer to match the distractor brevity.
+- Re-read your 4 choices before finalizing: if the longest is the correct one and the shortest is a flippant distractor, swap or rebalance.
+- Quick sanity check: word-count each choice. If the correct answer is more than ~30% longer than the average distractor, rewrite.
 4. Randomize choice order using true randomness (`shuf` via Bash, or `python -c "import random; ..."`).
 5. Write a short explanation that names the doc / section the answer comes from.
+
+**Balance the correct-answer distribution across A/B/C/D.** Per-question RNG alone tends to drift toward one or two letters across a 15-question scenario (LLM "randomness" instincts are biased — when you mentally place the correct answer, you tend to gravitate toward A or B). Counter this explicitly: before starting a scenario, generate a balanced shuffle of target letters (e.g., for 15 questions: `python3 -c "import random; pool = ['A']*4 + ['B']*4 + ['C']*4 + ['D']*3; random.shuffle(pool); print(pool)"`), and place each question's correct answer at the pre-assigned target. Some unevenness is fine (4/4/4/3 or 5/4/3/3 is normal); what to avoid is obvious skew like 11/3/1/0. Check the running tally as you go.
 
 ### 4. Present one question at a time
 
